@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Upcoming Courses</title>
+    <style>
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .course-date {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 5px;
+            text-align: center;
+            width: 100px;
+            flex-shrink: 0;
+        }
+        .course-details {
+            flex-grow: 1;
+        }
+        .register-button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-4">
+    <h2>Upcoming Courses</h2>
+    <div class="course-list">
+        <div th:each="course : ${listcourse}" class="course-item">
+            <div class="course-date" th:text="${course.startDate}">
+            </div>
+            <div class="course-details">
+                <strong th:text="${course.lectureName}"></strong> - <span th:text="${course.place}"></span>
+            </div>
+            <form th:action="@{/course/register}" method="post">
+                <input type="hidden" name="courseId" th:value="${course.id}">
+                <button type="submit" class="btn btn-primary register-button">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Register for Course</title>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-4">
+    <h2>Register for a Course</h2>
+    <form th:action="@{/course/register}" th:object="${registration}" method="post" class="form">
+        <div class="mb-3">
+            <label for="courseId" class="form-label">Course:</label>
+            <select class="form-select" th:field="*{courseId}" id="courseId" required>
+                <option th:each="course : ${courses}" th:value="${course.id}" th:text="${course.lectureName} + ' - ' + ${course.place} + ' (' + ${course.startDate} + ')'">
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="studentName" class="form-label">Student Name:</label>
+            <input class="form-control" type="text" th:field="*{studentName}" id="studentName" placeholder="Your Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input class="form-control" type="email" th:field="*{email}" id="email" placeholder="Your Email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+</body>
+</html>
